@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Prancheta Tática</title>
+
+  <!-- SEO & PWA Meta Tags -->
+  <meta name="description" content="Prancheta Tática interativa e responsiva para escalação de futebol de campo e futsal. Crie e simule táticas em qualquer dispositivo.">
+  <meta name="theme-color" content="#0a0f1e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Prancheta Tática">
+  <meta name="mobile-web-app-capable" content="yes">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Mobile overlay (drawer backdrop) -->
+  <div id="mobileOverlay" class="mobile-overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════ HEADER ══════════════════ -->
+  <header class="app-header">
+
+    <!-- Mobile hamburger -->
+    <button id="hamburgerBtn" class="hamburger-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="sidebar">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="header-logo">
+      <span class="header-logo-icon" aria-hidden="true">📋</span>
+      <h1 class="header-title">Prancheta Tática</h1>
+    </div>
+
+    <div class="header-team">
+      <label for="teamNameInput" class="header-label">Time</label>
+      <input
+        type="text"
+        id="teamNameInput"
+        class="team-name-input"
+        value="Meu Time"
+        placeholder="Nome do time..."
+        aria-label="Nome do Time"
+        maxlength="40"
+      >
+    </div>
+
+    <div class="header-right">
+      <div class="sport-selector">
+        <label for="sportSelect" class="header-label">Esporte</label>
+        <select id="sportSelect" class="sport-select" aria-label="Modalidade de Esporte">
+          <option value="soccer">Futebol de Campo</option>
+          <option value="futsal">Futsal (5x5)</option>
+        </select>
+      </div>
+
+      <button id="togglePresentation" class="btn-icon-text" aria-label="Entrar em tela cheia">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+          <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+        </svg>
+        <span class="btn-text-hide-sm">Tela Cheia</span>
+      </button>
+
+      <div class="status-indicator" title="Status de salvamento">
+        <div id="statusDot" class="status-dot" aria-hidden="true"></div>
+        <span id="statusText" class="status-text">Salvo</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════ APP LAYOUT ══════════════════ -->
+  <div class="app-container">
+
+    <!-- ══════════════════ SIDEBAR ══════════════════ -->
+    <aside id="sidebar" class="sidebar" aria-label="Painel de controle">
+
+      <!-- ── Section: Novo Jogador ── -->
+      <section class="sidebar-section" data-section="add-player">
+        <button
+          class="section-header"
+          aria-expanded="true"
+          aria-controls="section-body-add-player"
+          id="section-toggle-add-player"
+        >
+          <span class="section-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          </span>
+          <span class="section-label">Novo Jogador</span>
+          <svg class="section-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="section-body" id="section-body-add-player" role="region" aria-labelledby="section-toggle-add-player">
+          <form id="addPlayerForm" class="player-form" novalidate>
+            <div class="input-row">
+              <input
+                type="text"
+                id="playerName"
+                class="input-field input-name"
+                placeholder="Nome do jogador"
+                required
+                aria-label="Nome do jogador"
+                maxlength="30"
+              >
+              <input
+                type="number"
+                id="playerNumber"
+                class="input-field input-number"
+                placeholder="Nº"
+                min="1"
+                max="99"
+                aria-label="Número do jogador"
+              >
+            </div>
+            <div class="input-row">
+              <select id="playerRole" class="input-field" aria-label="Função do Jogador">
+                <option value="">Posição: Livre</option>
+                <option value="GK">Goleiro (GK)</option>
+                <option value="LD">Lateral Direito (LD)</option>
+                <option value="LE">Lateral Esquerdo (LE)</option>
+                <option value="ZAG">Zagueiro (ZAG)</option>
+                <option value="VOL">Volante (VOL)</option>
+                <option value="MC">Meia-Centro (MC)</option>
+                <option value="PT">Ponta (PT)</option>
+                <option value="CA">Centroavante (CA)</option>
+                <option value="FIXO">Fixo (Futsal)</option>
+                <option value="ALA">Ala (Futsal)</option>
+                <option value="PIVO">Pivô (Futsal)</option>
+              </select>
+            </div>
+            <div class="team-selector" role="group" aria-label="Selecionar uniforme">
+              <label id="btnHome" class="radio-btn home-active">
+                <input type="radio" name="playerTeam" value="home" checked>
+                <span class="radio-dot home-dot"></span>
+                Uniforme A
+              </label>
+              <label id="btnAway" class="radio-btn">
+                <input type="radio" name="playerTeam" value="away">
+                <span class="radio-dot away-dot"></span>
+                Uniforme B
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="addPlayerBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              Adicionar Jogador
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ── Section: Formações ── -->
+      <section class="sidebar-section" data-section="formations">
+        <button
+          class="section-header"
+          aria-expanded="true"
+          aria-controls="section-body-formations"
+          id="section-toggle-formations"
+        >
+          <span class="section-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </span>
+          <span class="section-label">Formações</span>
+          <svg class="section-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="section-body" id="section-body-formations" role="region" aria-labelledby="section-toggle-formations">
+          <div id="formationsGrid" class="formations-grid" role="list">
+            <!-- Dynamically populated via script.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Section: Banco / Elenco ── -->
+      <section class="sidebar-section sidebar-section--bench" data-section="bench">
+        <button
+          class="section-header"
+          aria-expanded="true"
+          aria-controls="section-body-bench"
+          id="section-toggle-bench"
+        >
+          <span class="section-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span class="section-label">Banco / Elenco</span>
+          <span id="playerCount" class="section-badge">0</span>
+          <svg class="section-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="section-body" id="section-body-bench" role="region" aria-labelledby="section-toggle-bench">
+          <div id="rosterList" class="roster-list" role="list" aria-label="Jogadores no banco">
+            <!-- Dynamically populated -->
+          </div>
+          <p class="bench-hint">Duplo clique para adicionar ou remover do campo.</p>
+        </div>
+      </section>
+
+      <!-- ── Section: Ações ── -->
+      <section class="sidebar-section" data-section="actions">
+        <button
+          class="section-header"
+          aria-expanded="true"
+          aria-controls="section-body-actions"
+          id="section-toggle-actions"
+        >
+          <span class="section-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </span>
+          <span class="section-label">Ações da Prancheta</span>
+          <svg class="section-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="section-body" id="section-body-actions" role="region" aria-labelledby="section-toggle-actions">
+          <div class="actions-grid">
+            <button id="exportJson" class="btn btn-secondary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Exportar
+            </button>
+            <button id="importJsonTrigger" class="btn btn-secondary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Importar
+            </button>
+          </div>
+          <input type="file" id="importJsonFile" class="hidden-input" accept=".json">
+          <button id="resetBoard" class="btn btn-danger">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+            Limpar Campo
+          </button>
+        </div>
+      </section>
+
+    </aside>
+    <!-- end sidebar -->
+
+    <!-- ══════════════════ MAIN FIELD ══════════════════ -->
+    <main class="pitch-container" id="pitchContainer">
+      <div class="pitch-wrapper" id="pitchWrapper">
+        <div id="pitch" class="pitch">
+
+          <!-- Field Markings -->
+          <div class="pitch-midline"></div>
+          <div class="pitch-center-circle"></div>
+          <div class="pitch-center-spot"></div>
+
+          <!-- Penalty Box Top -->
+          <div class="pitch-box-left">
+            <div class="pitch-box-left-inner"></div>
+            <div class="pitch-penalty-spot-left"></div>
+            <div class="pitch-penalty-arc-left"></div>
+          </div>
+
+          <!-- Penalty Box Bottom -->
+          <div class="pitch-box-right">
+            <div class="pitch-box-right-inner"></div>
+            <div class="pitch-penalty-spot-right"></div>
+            <div class="pitch-penalty-arc-right"></div>
+          </div>
+
+          <!-- Corners -->
+          <div class="pitch-corner-tl"></div>
+          <div class="pitch-corner-bl"></div>
+          <div class="pitch-corner-tr"></div>
+          <div class="pitch-corner-br"></div>
+
+          <!-- Goals -->
+          <div class="pitch-goal-left"></div>
+          <div class="pitch-goal-right"></div>
+
+          <!-- Player pins rendered dynamically -->
+
+        </div>
+
+        <!-- Floating exit presentation button -->
+        <button id="exitPresentationFloat" class="exit-presentation-float" aria-label="Sair da Apresentação">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Editar Prancheta
+        </button>
+
+      </div>
+    </main>
+
+  </div>
+  <!-- end app-container -->
+
+  <!-- Interact.js from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+  <!-- Main application logic -->
+  <script src="script.js"></script>
+</body>
+</html>
