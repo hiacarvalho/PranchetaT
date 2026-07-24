@@ -18,98 +18,98 @@ let state = {
 // ── Default roster (4-3-3, vertical layout) ──
 const defaultPlayers = [
   // Home starters
-  { id: 'h1',  name: 'Goleiro',        number: '1',  team: 'home', active: true,  position: { x: 50, y: 92 }, role: 'GK'  },
-  { id: 'h2',  name: 'Lat. Direito',   number: '2',  team: 'home', active: true,  position: { x: 15, y: 75 }, role: 'LD'  },
-  { id: 'h3',  name: 'Zag. Direito',   number: '3',  team: 'home', active: true,  position: { x: 38, y: 78 }, role: 'ZGD' },
-  { id: 'h4',  name: 'Zag. Esquerdo',  number: '4',  team: 'home', active: true,  position: { x: 62, y: 78 }, role: 'ZGE' },
-  { id: 'h5',  name: 'Lat. Esquerdo',  number: '6',  team: 'home', active: true,  position: { x: 85, y: 75 }, role: 'LE'  },
-  { id: 'h6',  name: 'Volante',        number: '5',  team: 'home', active: true,  position: { x: 50, y: 55 }, role: 'VOL' },
-  { id: 'h7',  name: 'Meio-Campo',     number: '8',  team: 'home', active: true,  position: { x: 30, y: 42 }, role: 'MC'  },
-  { id: 'h8',  name: 'Meio-Campo',     number: '10', team: 'home', active: true,  position: { x: 70, y: 42 }, role: 'MC'  },
-  { id: 'h9',  name: 'Ponta Direita',  number: '7',  team: 'home', active: true,  position: { x: 18, y: 22 }, role: 'PD'  },
-  { id: 'h10', name: 'Ponta Esquerda', number: '11', team: 'home', active: true,  position: { x: 82, y: 22 }, role: 'PE'  },
-  { id: 'h11', name: 'Centroavante',   number: '9',  team: 'home', active: true,  position: { x: 50, y: 18 }, role: 'CA'  },
+  { id: 'h1', name: 'Goleiro', number: '1', team: 'home', active: true, position: { x: 50, y: 92 }, role: 'GK' },
+  { id: 'h2', name: 'Lat. Direito', number: '2', team: 'home', active: true, position: { x: 15, y: 75 }, role: 'LD' },
+  { id: 'h3', name: 'Zag. Direito', number: '3', team: 'home', active: true, position: { x: 38, y: 78 }, role: 'ZGD' },
+  { id: 'h4', name: 'Zag. Esquerdo', number: '4', team: 'home', active: true, position: { x: 62, y: 78 }, role: 'ZGE' },
+  { id: 'h5', name: 'Lat. Esquerdo', number: '6', team: 'home', active: true, position: { x: 85, y: 75 }, role: 'LE' },
+  { id: 'h6', name: 'Volante', number: '5', team: 'home', active: true, position: { x: 50, y: 55 }, role: 'VOL' },
+  { id: 'h7', name: 'Meio-Campo', number: '8', team: 'home', active: true, position: { x: 30, y: 42 }, role: 'MC' },
+  { id: 'h8', name: 'Meio-Campo', number: '10', team: 'home', active: true, position: { x: 70, y: 42 }, role: 'MC' },
+  { id: 'h9', name: 'Ponta Direita', number: '7', team: 'home', active: true, position: { x: 18, y: 22 }, role: 'PD' },
+  { id: 'h10', name: 'Ponta Esquerda', number: '11', team: 'home', active: true, position: { x: 82, y: 22 }, role: 'PE' },
+  { id: 'h11', name: 'Centroavante', number: '9', team: 'home', active: true, position: { x: 50, y: 18 }, role: 'CA' },
   // Home reserves
-  { id: 'h12', name: 'Zecão',          number: '12', team: 'home', active: false, position: { x: 50, y: 50 } },
-  { id: 'h13', name: 'Pedrinho',       number: '13', team: 'home', active: false, position: { x: 50, y: 50 } },
-  { id: 'h14', name: 'Juninho',        number: '14', team: 'home', active: false, position: { x: 50, y: 50 } },
-  { id: 'h15', name: 'Chico',          number: '15', team: 'home', active: false, position: { x: 50, y: 50 } },
+  { id: 'h12', name: 'Zecão', number: '12', team: 'home', active: false, position: { x: 50, y: 50 } },
+  { id: 'h13', name: 'Pedrinho', number: '13', team: 'home', active: false, position: { x: 50, y: 50 } },
+  { id: 'h14', name: 'Juninho', number: '14', team: 'home', active: false, position: { x: 50, y: 50 } },
+  { id: 'h15', name: 'Chico', number: '15', team: 'home', active: false, position: { x: 50, y: 50 } },
   // Away bench
-  { id: 'a1',  name: 'Goleiro Adv',    number: '1',  team: 'away', active: false, position: { x: 50, y: 8  } },
-  { id: 'a2',  name: 'Zagueiro Adv',   number: '3',  team: 'away', active: false, position: { x: 50, y: 22 } },
-  { id: 'a3',  name: 'Atacante Adv',   number: '9',  team: 'away', active: false, position: { x: 50, y: 70 } }
+  { id: 'a1', name: 'Goleiro Adv', number: '1', team: 'away', active: false, position: { x: 50, y: 8 } },
+  { id: 'a2', name: 'Zagueiro Adv', number: '3', team: 'away', active: false, position: { x: 50, y: 22 } },
+  { id: 'a3', name: 'Atacante Adv', number: '9', team: 'away', active: false, position: { x: 50, y: 70 } }
 ];
 
 // ── Formation presets (x/y percentages, vertical layout) ──
 const formations = {
   // Soccer (11 players)
   '442': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 15, y: 75, role: 'LD'   },
-    { x: 38, y: 78, role: 'ZGD'  }, { x: 62, y: 78, role: 'ZGE'  },
-    { x: 85, y: 75, role: 'LE'   }, { x: 35, y: 55, role: 'VOL'  },
-    { x: 65, y: 55, role: 'MC'   }, { x: 20, y: 40, role: 'MD'   },
-    { x: 80, y: 40, role: 'ME'   }, { x: 38, y: 20, role: 'CA'   },
-    { x: 62, y: 20, role: 'CA'   }
+    { x: 50, y: 92, role: 'GK' }, { x: 15, y: 75, role: 'LD' },
+    { x: 38, y: 78, role: 'ZGD' }, { x: 62, y: 78, role: 'ZGE' },
+    { x: 85, y: 75, role: 'LE' }, { x: 35, y: 55, role: 'VOL' },
+    { x: 65, y: 55, role: 'MC' }, { x: 20, y: 40, role: 'MD' },
+    { x: 80, y: 40, role: 'ME' }, { x: 38, y: 20, role: 'CA' },
+    { x: 62, y: 20, role: 'CA' }
   ],
   '433': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 15, y: 75, role: 'LD'   },
-    { x: 38, y: 78, role: 'ZGD'  }, { x: 62, y: 78, role: 'ZGE'  },
-    { x: 85, y: 75, role: 'LE'   }, { x: 50, y: 55, role: 'VOL'  },
-    { x: 30, y: 42, role: 'MC'   }, { x: 70, y: 42, role: 'MC'   },
-    { x: 18, y: 22, role: 'PD'   }, { x: 82, y: 22, role: 'PE'   },
-    { x: 50, y: 18, role: 'CA'   }
+    { x: 50, y: 92, role: 'GK' }, { x: 15, y: 75, role: 'LD' },
+    { x: 38, y: 78, role: 'ZGD' }, { x: 62, y: 78, role: 'ZGE' },
+    { x: 85, y: 75, role: 'LE' }, { x: 50, y: 55, role: 'VOL' },
+    { x: 30, y: 42, role: 'MC' }, { x: 70, y: 42, role: 'MC' },
+    { x: 18, y: 22, role: 'PD' }, { x: 82, y: 22, role: 'PE' },
+    { x: 50, y: 18, role: 'CA' }
   ],
   '352': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 28, y: 78, role: 'ZGD'  },
-    { x: 50, y: 80, role: 'ZGC'  }, { x: 72, y: 78, role: 'ZGE'  },
-    { x: 15, y: 60, role: 'ALD'  }, { x: 38, y: 58, role: 'VOL'  },
-    { x: 62, y: 58, role: 'VOL'  }, { x: 85, y: 60, role: 'ALE'  },
-    { x: 50, y: 40, role: 'MCO'  }, { x: 38, y: 20, role: 'CA'   },
-    { x: 62, y: 20, role: 'CA'   }
+    { x: 50, y: 92, role: 'GK' }, { x: 28, y: 78, role: 'ZGD' },
+    { x: 50, y: 80, role: 'ZGC' }, { x: 72, y: 78, role: 'ZGE' },
+    { x: 15, y: 60, role: 'ALD' }, { x: 38, y: 58, role: 'VOL' },
+    { x: 62, y: 58, role: 'VOL' }, { x: 85, y: 60, role: 'ALE' },
+    { x: 50, y: 40, role: 'MCO' }, { x: 38, y: 20, role: 'CA' },
+    { x: 62, y: 20, role: 'CA' }
   ],
   '4231': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 15, y: 75, role: 'LD'   },
-    { x: 38, y: 78, role: 'ZGD'  }, { x: 62, y: 78, role: 'ZGE'  },
-    { x: 85, y: 75, role: 'LE'   }, { x: 35, y: 56, role: 'VOL'  },
-    { x: 65, y: 56, role: 'VOL'  }, { x: 20, y: 38, role: 'MEID' },
+    { x: 50, y: 92, role: 'GK' }, { x: 15, y: 75, role: 'LD' },
+    { x: 38, y: 78, role: 'ZGD' }, { x: 62, y: 78, role: 'ZGE' },
+    { x: 85, y: 75, role: 'LE' }, { x: 35, y: 56, role: 'VOL' },
+    { x: 65, y: 56, role: 'VOL' }, { x: 20, y: 38, role: 'MEID' },
     { x: 50, y: 38, role: 'MEIC' }, { x: 80, y: 38, role: 'MEIE' },
-    { x: 50, y: 18, role: 'CA'   }
+    { x: 50, y: 18, role: 'CA' }
   ],
   '532': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 12, y: 74, role: 'ALD'  },
-    { x: 30, y: 78, role: 'ZGD'  }, { x: 50, y: 80, role: 'ZGC'  },
-    { x: 70, y: 78, role: 'ZGE'  }, { x: 88, y: 74, role: 'ALE'  },
-    { x: 50, y: 55, role: 'VOL'  }, { x: 30, y: 42, role: 'MC'   },
-    { x: 70, y: 42, role: 'MC'   }, { x: 38, y: 20, role: 'CA'   },
-    { x: 62, y: 20, role: 'CA'   }
+    { x: 50, y: 92, role: 'GK' }, { x: 12, y: 74, role: 'ALD' },
+    { x: 30, y: 78, role: 'ZGD' }, { x: 50, y: 80, role: 'ZGC' },
+    { x: 70, y: 78, role: 'ZGE' }, { x: 88, y: 74, role: 'ALE' },
+    { x: 50, y: 55, role: 'VOL' }, { x: 30, y: 42, role: 'MC' },
+    { x: 70, y: 42, role: 'MC' }, { x: 38, y: 20, role: 'CA' },
+    { x: 62, y: 20, role: 'CA' }
   ],
   '343': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 25, y: 78, role: 'ZGD'  },
-    { x: 50, y: 80, role: 'ZGC'  }, { x: 75, y: 78, role: 'ZGE'  },
-    { x: 15, y: 52, role: 'MD'   }, { x: 38, y: 54, role: 'VOL'  },
-    { x: 62, y: 54, role: 'VOL'  }, { x: 85, y: 52, role: 'ME'   },
-    { x: 20, y: 24, role: 'PD'   }, { x: 80, y: 24, role: 'PE'   },
-    { x: 50, y: 18, role: 'CA'   }
+    { x: 50, y: 92, role: 'GK' }, { x: 25, y: 78, role: 'ZGD' },
+    { x: 50, y: 80, role: 'ZGC' }, { x: 75, y: 78, role: 'ZGE' },
+    { x: 15, y: 52, role: 'MD' }, { x: 38, y: 54, role: 'VOL' },
+    { x: 62, y: 54, role: 'VOL' }, { x: 85, y: 52, role: 'ME' },
+    { x: 20, y: 24, role: 'PD' }, { x: 80, y: 24, role: 'PE' },
+    { x: 50, y: 18, role: 'CA' }
   ],
   // Futsal (5 players)
   '22': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 25, y: 70, role: 'DEF'  },
-    { x: 75, y: 70, role: 'DEF'  }, { x: 25, y: 30, role: 'ALA'  },
-    { x: 75, y: 30, role: 'ALA'  }
+    { x: 50, y: 92, role: 'GK' }, { x: 25, y: 70, role: 'DEF' },
+    { x: 75, y: 70, role: 'DEF' }, { x: 25, y: 30, role: 'ALA' },
+    { x: 75, y: 30, role: 'ALA' }
   ],
   '31': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 50, y: 72, role: 'FIXO' },
-    { x: 20, y: 50, role: 'ALA'  }, { x: 80, y: 50, role: 'ALA'  },
+    { x: 50, y: 92, role: 'GK' }, { x: 50, y: 72, role: 'FIXO' },
+    { x: 20, y: 50, role: 'ALA' }, { x: 80, y: 50, role: 'ALA' },
     { x: 50, y: 22, role: 'PIVO' }
   ],
   '40': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 20, y: 65, role: 'ALA'  },
+    { x: 50, y: 92, role: 'GK' }, { x: 20, y: 65, role: 'ALA' },
     { x: 40, y: 65, role: 'FIXO' }, { x: 60, y: 65, role: 'FIXO' },
-    { x: 80, y: 65, role: 'ALA'  }
+    { x: 80, y: 65, role: 'ALA' }
   ],
   '121': [
-    { x: 50, y: 92, role: 'GK'   }, { x: 50, y: 74, role: 'FIXO' },
-    { x: 22, y: 48, role: 'ALA'  }, { x: 78, y: 48, role: 'ALA'  },
+    { x: 50, y: 92, role: 'GK' }, { x: 50, y: 74, role: 'FIXO' },
+    { x: 22, y: 48, role: 'ALA' }, { x: 78, y: 48, role: 'ALA' },
     { x: 50, y: 22, role: 'PIVO' }
   ]
 };
@@ -121,24 +121,25 @@ const formations = {
 const $ = (id) => document.getElementById(id);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-const teamNameInput       = $('teamNameInput');
-const sportSelect         = $('sportSelect');
-const togglePresentation  = $('togglePresentation');
+const teamNameInput = $('teamNameInput');
+const sportSelect = $('sportSelect');
+const togglePresentation = $('togglePresentation');
 const exitPresentationFloat = $('exitPresentationFloat');
-const statusDot           = $('statusDot');
-const statusText          = $('statusText');
-const addPlayerForm       = $('addPlayerForm');
-const playerNameInput     = $('playerName');
-const playerNumberInput   = $('playerNumber');
-const playerRoleSelect    = $('playerRole');
-const rosterList          = $('rosterList');
-const playerCount         = $('playerCount');
-const pitch               = $('pitch');
-const btnHome             = $('btnHome');
-const btnAway             = $('btnAway');
-const hamburgerBtn        = $('hamburgerBtn');
-const sidebar             = $('sidebar');
-const mobileOverlay       = $('mobileOverlay');
+const statusDot = $('statusDot');
+const statusText = $('statusText');
+const addPlayerForm = $('addPlayerForm');
+const playerNameInput = $('playerName');
+const playerNumberInput = $('playerNumber');
+const playerRoleSelect = $('playerRole');
+const rosterList = $('rosterList');
+const playerCount = $('playerCount');
+const pitch = $('pitch');
+const btnHome = $('btnHome');
+const btnAway = $('btnAway');
+const hamburgerBtn = $('hamburgerBtn');
+const sidebar = $('sidebar');
+const mobileOverlay = $('mobileOverlay');
+const mobileExpandBtn = $('mobileExpandBtn');
 
 // ══════════════════════════════════════════════
 // GHOST DRAG STATE
@@ -163,6 +164,7 @@ function init() {
   renderFormations();
   render();
   setupInteract();
+  setupGhostSafetyCleanup();
 }
 
 // ── Load persisted state from localStorage ──
@@ -174,9 +176,9 @@ function loadState() {
       if (parsed && typeof parsed === 'object') {
         state = parsed;
         // Ensure required fields
-        if (!Array.isArray(state.players))   state.players = deepClone(defaultPlayers);
-        if (!state.teamName)                 state.teamName = 'Tabajara FC';
-        if (!state.sport)                    state.sport = 'soccer';
+        if (!Array.isArray(state.players)) state.players = deepClone(defaultPlayers);
+        if (!state.teamName) state.teamName = 'Tabajara FC';
+        if (!state.sport) state.sport = 'soccer';
         if (state.presentationActive == null) state.presentationActive = false;
       }
     } else {
@@ -191,7 +193,7 @@ function loadState() {
 // ── Sync form/select values from state ──
 function syncUIFromState() {
   teamNameInput.value = state.teamName;
-  sportSelect.value   = state.sport;
+  sportSelect.value = state.sport;
   updatePageTitle();
   updateCourtLayout();
   setPresentationMode(state.presentationActive);
@@ -268,6 +270,11 @@ function setupMobileDrawer() {
   hamburgerBtn.addEventListener('click', toggleDrawer);
   mobileOverlay.addEventListener('click', closeDrawer);
 
+  // Mobile expand button (floating button on field, mobile only)
+  if (mobileExpandBtn) {
+    mobileExpandBtn.addEventListener('click', openDrawer);
+  }
+
   // Close with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && sidebar.classList.contains('is-open')) {
@@ -318,10 +325,10 @@ function setupFormListeners() {
   // Add player
   addPlayerForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name   = playerNameInput.value.trim();
+    const name = playerNameInput.value.trim();
     const number = playerNumberInput.value || String(Math.floor(Math.random() * 99) + 1);
-    const team   = document.querySelector('input[name="playerTeam"]:checked').value;
-    const role   = playerRoleSelect.value;
+    const team = document.querySelector('input[name="playerTeam"]:checked').value;
+    const role = playerRoleSelect.value;
 
     if (!name) return;
 
@@ -340,9 +347,9 @@ function setupFormListeners() {
     render();
 
     // Reset form
-    playerNameInput.value  = '';
+    playerNameInput.value = '';
     playerNumberInput.value = '';
-    playerRoleSelect.value  = '';
+    playerRoleSelect.value = '';
     playerNameInput.focus();
   });
 
@@ -393,10 +400,10 @@ function setupStorageActions() {
   $('exportJson').addEventListener('click', () => {
     const json = JSON.stringify(state, null, 2);
     const blob = new Blob([json], { type: 'application/json' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
     const name = state.teamName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    a.href     = url;
+    a.href = url;
     a.download = `prancheta-${name}.json`;
     a.click();
     URL.revokeObjectURL(url);
@@ -404,7 +411,7 @@ function setupStorageActions() {
 
   // Import trigger
   const importTrigger = $('importJsonTrigger');
-  const importFile    = $('importJsonFile');
+  const importFile = $('importJsonFile');
 
   importTrigger.addEventListener('click', () => importFile.click());
 
@@ -417,9 +424,9 @@ function setupStorageActions() {
       try {
         const data = JSON.parse(ev.target.result);
         if (data && typeof data === 'object') {
-          state.teamName          = data.teamName  || 'Importado';
-          state.players           = Array.isArray(data.players) ? data.players : [];
-          state.sport             = data.sport     || 'soccer';
+          state.teamName = data.teamName || 'Importado';
+          state.players = Array.isArray(data.players) ? data.players : [];
+          state.sport = data.sport || 'soccer';
           state.presentationActive = data.presentationActive || false;
 
           syncUIFromState();
@@ -535,19 +542,19 @@ function renderFormations() {
 
   const list = state.sport === 'soccer'
     ? [
-        { key: '442',  label: '4-4-2' },
-        { key: '433',  label: '4-3-3' },
-        { key: '352',  label: '3-5-2' },
-        { key: '4231', label: '4-2-3-1' },
-        { key: '532',  label: '5-3-2' },
-        { key: '343',  label: '3-4-3' }
-      ]
+      { key: '442', label: '4-4-2' },
+      { key: '433', label: '4-3-3' },
+      { key: '352', label: '3-5-2' },
+      { key: '4231', label: '4-2-3-1' },
+      { key: '532', label: '5-3-2' },
+      { key: '343', label: '3-4-3' }
+    ]
     : [
-        { key: '121', label: '1-2-1 (Diamante)' },
-        { key: '22',  label: '2-2 (Quadrado)' },
-        { key: '31',  label: '3-1 (Padrão)' },
-        { key: '40',  label: '4-0 (Linha)' }
-      ];
+      { key: '121', label: '1-2-1 (Diamante)' },
+      { key: '22', label: '2-2 (Quadrado)' },
+      { key: '31', label: '3-1 (Padrão)' },
+      { key: '40', label: '4-0 (Linha)' }
+    ];
 
   list.forEach(({ key, label }) => {
     const btn = document.createElement('button');
@@ -583,7 +590,7 @@ function applyFormation(formationKey) {
     homePlayers.push(ph);
   }
 
-  let active   = homePlayers.filter((p) =>  p.active);
+  let active = homePlayers.filter((p) => p.active);
   let inactive = homePlayers.filter((p) => !p.active);
 
   // Activate inactive players up to targetCount
@@ -640,7 +647,7 @@ function renderFieldPlayer(player) {
   pin.className = `field-player ${player.team}`;
   pin.setAttribute('data-id', player.id);
   pin.style.left = `${player.position.x}%`;
-  pin.style.top  = `${player.position.y}%`;
+  pin.style.top = `${player.position.y}%`;
   pin.textContent = player.number;
 
   // Role badge (home team only)
@@ -763,10 +770,10 @@ function setupInteractFieldPlayers() {
 
         const pitchRect = pitch.getBoundingClientRect();
         const playerRect = el.getBoundingClientRect();
-        const cx = playerRect.left + playerRect.width  / 2 - pitchRect.left;
-        const cy = playerRect.top  + playerRect.height / 2 - pitchRect.top;
+        const cx = playerRect.left + playerRect.width / 2 - pitchRect.left;
+        const cy = playerRect.top + playerRect.height / 2 - pitchRect.top;
 
-        let pctX = (cx / pitchRect.width)  * 100;
+        let pctX = (cx / pitchRect.width) * 100;
         let pctY = (cy / pitchRect.height) * 100;
 
         const playerId = el.getAttribute('data-id');
@@ -807,7 +814,7 @@ function setupInteractBench() {
         if (badge) badge.remove();
 
         const size = Math.max(shirtEl.offsetWidth, 44);
-        ghost.style.width  = size + 'px';
+        ghost.style.width = size + 'px';
         ghost.style.height = size + 'px';
 
         // Position at cursor (guard against missing pointer data)
@@ -833,7 +840,7 @@ function setupInteractBench() {
         const overPitch = (
           ptr.clientX >= pitchRect.left &&
           ptr.clientX <= pitchRect.right &&
-          ptr.clientY >= pitchRect.top  &&
+          ptr.clientY >= pitchRect.top &&
           ptr.clientY <= pitchRect.bottom
         );
         pitch.classList.toggle('drop-active', overPitch);
@@ -853,12 +860,12 @@ function setupInteractBench() {
 
           const droppedOnPitch = (
             px >= pitchRect.left && px <= pitchRect.right &&
-            py >= pitchRect.top  && py <= pitchRect.bottom
+            py >= pitchRect.top && py <= pitchRect.bottom
           );
 
           if (droppedOnPitch) {
-            const pctX = clamp(((px - pitchRect.left) / pitchRect.width)  * 100, 2, 98);
-            const pctY = clamp(((py - pitchRect.top)  / pitchRect.height) * 100, 2, 98);
+            const pctX = clamp(((px - pitchRect.left) / pitchRect.width) * 100, 2, 98);
+            const pctY = clamp(((py - pitchRect.top) / pitchRect.height) * 100, 2, 98);
             const playerId = original.getAttribute('data-id');
             activatePlayer(playerId, pctX, pctY);
 
@@ -881,11 +888,34 @@ function setupInteractBench() {
 }
 
 
-// ── Move ghost element to cursor position (uses transform) ──
+// ── Move ghost element to cursor position (uses transform for GPU performance) ──
 function positionGhost(clientX, clientY) {
-  // We use left/top only for initial placement, then only transform for animation
-  ghost.style.left = clientX + 'px';
-  ghost.style.top  = clientY + 'px';
+  // Using transform3d for GPU-composited movement — avoids layout thrashing
+  ghost.style.transform = `translate3d(calc(${clientX}px - 50%), calc(${clientY}px - 50%), 0) scale(1.18)`;
+}
+
+// ── Safety net: remove any orphaned ghost on pointer/touch release ──
+function setupGhostSafetyCleanup() {
+  function cleanupGhost() {
+    if (ghost) {
+      ghost.remove();
+      ghost = null;
+    }
+    if (ghostRafId) {
+      cancelAnimationFrame(ghostRafId);
+      ghostRafId = null;
+    }
+    // Also clean up any lingering is-dragging classes
+    document.querySelectorAll('.bench-player.is-dragging').forEach(el => {
+      el.classList.remove('is-dragging');
+    });
+    pitch.classList.remove('drop-active');
+  }
+
+  // Capture phase so it fires before interact.js can swallow the event
+  window.addEventListener('pointerup', cleanupGhost, true);
+  window.addEventListener('touchend', cleanupGhost, { passive: true, capture: true });
+  window.addEventListener('touchcancel', cleanupGhost, { passive: true, capture: true });
 }
 
 // ══════════════════════════════════════════════
