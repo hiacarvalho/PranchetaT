@@ -1007,392 +1007,409 @@ body {
   aspect-ratio: 1;
   border: 2px solid var(--field-line);
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 50%);
   clip-path: inset(0 0 50% 0);
 }
 
-/* Corners */
-.pitch-corner-tl {
+/* Goal areas (net shadows) */
+.pitch-goal-left, .pitch-goal-right {
   position: absolute;
-  top: -1px; left: -1px;
-  width: 2%; aspect-ratio: 1;
-  border-right: 2px solid var(--field-line);
-  border-bottom: 2px solid var(--field-line);
-  border-bottom-right-radius: 100%;
+  left: 50%;
+  width: 25%;
+  height: 20%;
+  transform: translate(-50%);
+  background: radial-gradient(circle, rgba(0,0,0,0.1), transparent);
+  border-radius: 4px;
+  pointer-events: none;
 }
 
-.pitch-corner-bl {
+.pitch-goal-left { top: -10%; }
+.pitch-goal-right { bottom: -10%; }
+
+/* ── Corners (decorative arcs) ── */
+.pitch-corner-tl, .pitch-corner-bl, .pitch-corner-tr, .pitch-corner-br {
   position: absolute;
-  bottom: -1px; left: -1px;
-  width: 2%; aspect-ratio: 1;
-  border-right: 2px solid var(--field-line);
-  border-top: 2px solid var(--field-line);
-  border-top-right-radius: 100%;
+  width: 6%;
+  aspect-ratio: 1;
+  border: 2px solid var(--field-line-sub);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
-.pitch-corner-tr {
-  position: absolute;
-  top: -1px; right: -1px;
-  width: 2%; aspect-ratio: 1;
-  border-left: 2px solid var(--field-line);
-  border-bottom: 2px solid var(--field-line);
-  border-bottom-left-radius: 100%;
-}
+.pitch-corner-tl { top: 0; left: 0; clip-path: inset(0 50% 50% 0); }
+.pitch-corner-tr { top: 0; right: 0; clip-path: inset(0 0 50% 50%); }
+.pitch-corner-bl { bottom: 0; left: 0; clip-path: inset(50% 50% 0 0); }
+.pitch-corner-br { bottom: 0; right: 0; clip-path: inset(50% 0 0 50%); }
 
-.pitch-corner-br {
-  position: absolute;
-  bottom: -1px; right: -1px;
-  width: 2%; aspect-ratio: 1;
-  border-left: 2px solid var(--field-line);
-  border-top: 2px solid var(--field-line);
-  border-top-left-radius: 100%;
-}
-
-/* Goals */
-.pitch-goal-left {
-  position: absolute;
-  top: -5px;
-  left: 41.2%;
-  width: 17.6%;
-  height: 5px;
-  background: white;
-  border-radius: 4px 4px 0 0;
-}
-
-.pitch-goal-right {
-  position: absolute;
-  bottom: -5px;
-  left: 41.2%;
-  width: 17.6%;
-  height: 5px;
-  background: white;
-  border-radius: 0 0 4px 4px;
-}
-
-/* ══════════════════════════════════════════════
-   FIELD PLAYER PINS
-══════════════════════════════════════════════ */
+/* ── Field Player Pins ── */
 .field-player {
   position: absolute;
-  width: 42px;
-  height: 42px;
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   color: #fff;
-  border: 2.5px solid rgba(255,255,255,0.9);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+  border: 3px solid rgba(255,255,255,0.3);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6);
   cursor: grab;
   user-select: none;
   touch-action: none;
-  z-index: 10;
-  /* Centered on its percentage coordinate */
-  transform: translate3d(-50%, -50%, 0);
-  transition:
-    box-shadow var(--t-fast),
-    border-color var(--t-fast),
-    transform var(--t-base);
   will-change: transform;
+  transition: box-shadow var(--t-fast);
 }
 
 .field-player.home { background: var(--team-home); }
 .field-player.away { background: var(--team-away); }
 
 .field-player:hover {
-  border-color: var(--accent-2);
-  box-shadow: 0 6px 22px rgba(0,0,0,0.6), 0 0 0 3px var(--accent-dim);
-  z-index: 15;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
 }
+
+.field-player:active { cursor: grabbing; }
 
 .field-player.is-dragging {
-  cursor: grabbing;
-  z-index: 100;
-  border-color: var(--accent);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 0 3px var(--accent-dim);
-}
-
-/* Name tag below pin */
-.field-player-name {
-  position: absolute;
-  bottom: -22px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(10, 15, 30, 0.88);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-size: 0.66rem;
-  font-weight: 700;
-  white-space: nowrap;
-  pointer-events: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
-}
-
-/* Role badge on field */
-.field-player-role {
-  position: absolute;
-  top: -7px;
-  right: -8px;
-  background: var(--clr-bg);
-  border: 1.5px solid rgba(255,255,255,0.4);
-  color: var(--txt-secondary);
-  font-size: 0.56rem;
-  font-weight: 800;
-  padding: 1px 3px;
-  border-radius: 4px;
-  pointer-events: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  white-space: nowrap;
-}
-
-.field-player.home .field-player-role { color: #93c5fd; border-color: rgba(59,130,246,0.6); }
-.field-player.away .field-player-role { color: #fca5a5; border-color: rgba(239,68,68,0.6); }
-
-/* Pop-in animation when dropped onto field */
-@keyframes pop-in {
-  0%   { transform: translate3d(-50%, -50%, 0) scale(0.5); opacity: 0; }
-  60%  { transform: translate3d(-50%, -50%, 0) scale(1.15); opacity: 1; }
-  80%  { transform: translate3d(-50%, -50%, 0) scale(0.95); }
-  100% { transform: translate3d(-50%, -50%, 0) scale(1); }
+  box-shadow: 0 12px 32px rgba(0,0,0,0.85);
+  z-index: 1000;
 }
 
 .field-player.pop-in {
-  animation: pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation: pop-in 0.4s cubic-bezier(0.36, 0, 0.66, 1);
 }
 
-/* ══════════════════════════════════════════════
-   FUTSAL OVERRIDES
-══════════════════════════════════════════════ */
-.pitch.futsal .pitch-penalty-arc-left,
-.pitch.futsal .pitch-penalty-arc-right,
-.pitch.futsal .pitch-box-left-inner,
-.pitch.futsal .pitch-box-right-inner {
-  display: none !important;
+@keyframes pop-in {
+  0% {
+    transform: translate3d(-50%, -50%, 0) scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: translate3d(-50%, -50%, 0) scale(1.15);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+    opacity: 1;
+  }
 }
 
-.pitch.futsal .pitch-box-left {
-  top: 0;
-  left: 12.5%;
-  width: 75%;
-  height: 15%;
-  border-left: 2px solid var(--field-line);
-  border-right: 2px solid var(--field-line);
-  border-bottom: 2px solid var(--field-line);
-  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+/* Role badge on field player */
+.field-player-role {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--clr-bg);
+  border: 2px solid rgba(255,255,255,0.3);
+  color: var(--accent-2);
+  font-size: 0.56rem;
+  font-weight: 800;
+  padding: 2px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+  line-height: 1;
+  pointer-events: none;
 }
 
-.pitch.futsal .pitch-box-right {
-  bottom: 0;
-  left: 12.5%;
-  width: 75%;
-  height: 15%;
-  border-left: 2px solid var(--field-line);
-  border-right: 2px solid var(--field-line);
-  border-top: 2px solid var(--field-line);
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+/* Name label below/above pin (toggles based on position) */
+.field-player-name {
+  position: absolute;
+  bottom: -1.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  color: var(--txt-primary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.pitch.futsal .pitch-penalty-spot-left { left: 50%; top: 15%; }
-.pitch.futsal .pitch-penalty-spot-right { left: 50%; bottom: 15%; }
-
-/* Futsal double penalty spots */
-.pitch.futsal::before {
+.field-player-name::before {
   content: '';
   position: absolute;
-  left: 50%; top: 25%;
-  width: 5px; height: 5px;
-  background: var(--field-line);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid rgba(0,0,0,0.6);
 }
 
-.pitch.futsal::after {
-  content: '';
-  position: absolute;
-  left: 50%; bottom: 25%;
-  width: 5px; height: 5px;
-  background: var(--field-line);
-  border-radius: 50%;
-  transform: translate(-50%, 50%);
-  z-index: 1;
+/* Adjust label position if player is at bottom */
+.field-player[style*="top: 8"] .field-player-name,
+.field-player[style*="top: 9"] .field-player-name {
+  bottom: auto;
+  top: -1.8rem;
+}
+
+.field-player[style*="top: 8"] .field-player-name::before,
+.field-player[style*="top: 9"] .field-player-name::before {
+  bottom: auto;
+  top: 100%;
+  border-bottom: none;
+  border-top: 3px solid rgba(0,0,0,0.6);
 }
 
 /* ══════════════════════════════════════════════
    PRESENTATION MODE
 ══════════════════════════════════════════════ */
-body.presentation-mode .app-header { display: none !important; }
-body.presentation-mode .sidebar    { display: none !important; }
+.exit-presentation-float {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--txt-primary);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all var(--t-fast);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+}
+
+.exit-presentation-float:hover {
+  background: rgba(0,0,0,0.85);
+  border-color: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+
+body.presentation-mode {
+  overflow: hidden;
+}
+
+body.presentation-mode .app-header,
+body.presentation-mode .sidebar {
+  display: none;
+}
 
 body.presentation-mode .app-container {
   height: 100vh;
 }
 
 body.presentation-mode .pitch-container {
-  height: 100vh;
-  padding: 0.75rem;
+  padding: 1rem;
 }
 
 body.presentation-mode .pitch-wrapper {
-  max-height: calc(100vh - 1.5rem);
-  width: calc((100vh - 1.5rem) * 68 / 105);
-}
-
-body.presentation-mode .pitch-wrapper.futsal-active {
-  width: calc((100vh - 1.5rem) * 40 / 80);
-}
-
-/* Floating exit button */
-.exit-presentation-float {
-  position: absolute;
-  bottom: 18px;
-  right: 18px;
-  display: none;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgba(17, 24, 39, 0.9);
-  backdrop-filter: blur(12px);
-  color: var(--txt-primary);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 0.65rem 1.1rem;
-  border-radius: var(--radius-full);
-  font-weight: 700;
-  font-size: 0.82rem;
-  font-family: var(--font);
-  box-shadow: var(--shadow-lg);
-  cursor: pointer;
-  z-index: 1000;
-  transition: all var(--t-fast);
-}
-
-.exit-presentation-float:hover {
-  background: var(--accent);
-  color: #000;
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  height: calc(100vh - 2rem);
+  max-height: calc(100vh - 2rem);
 }
 
 body.presentation-mode .exit-presentation-float {
-  display: flex !important;
+  display: flex;
 }
 
-/* Utilities */
-.hidden-input { display: none; }
-
 /* ══════════════════════════════════════════════
-   RESPONSIVE — TABLET (≤ 1024px)
+   RESPONSIVE / MOBILE
 ══════════════════════════════════════════════ */
+
 @media (max-width: 1024px) {
-  :root { --sidebar-w: 280px; }
-}
+  .header-team {
+    max-width: 180px;
+  }
 
-/* ══════════════════════════════════════════════
-   RESPONSIVE — MOBILE (≤ 768px)
-══════════════════════════════════════════════ */
-@media (max-width: 768px) {
-  :root { --header-h: 52px; }
+  .sport-selector {
+    display: none;
+  }
 
-  body { overflow: hidden; }
+  .btn-text-hide-sm {
+    display: none;
+  }
 
-  /* Show hamburger */
-  .hamburger-btn { display: flex; }
-
-  /* Hide text labels in header */
-  .btn-text-hide-sm { display: none; }
-  .sport-selector .header-label { display: none; }
-  .status-text { display: none; }
-  .header-team { display: none; }
-
-  /* Sidebar becomes a fixed drawer */
   .sidebar {
-    position: fixed;
-    top: var(--header-h);
+    position: absolute;
     left: 0;
-    bottom: 0;
-    width: min(var(--sidebar-w), 88vw);
-    transform: translateX(-110%);
-    z-index: 50;
-    box-shadow: var(--shadow-xl);
-    overflow-y: auto;
+    top: var(--header-h);
+    height: calc(100vh - var(--header-h));
+    width: var(--sidebar-w);
+    transform: translateX(-100%);
+    border-right: none;
+    border-bottom: none;
+    z-index: 45;
   }
 
   .sidebar.is-open {
     transform: translateX(0);
+    border-right: 1px solid var(--clr-border);
   }
 
-  /* App container: field takes full space */
-  .app-container {
-    flex-direction: row;
-    height: calc(100vh - var(--header-h));
-  }
-
-  /* Field fills everything */
-  .pitch-container {
-    flex: 1;
-    padding: 0.5rem;
-  }
-
-  .pitch-wrapper {
-    height: calc(100vh - var(--header-h) - 1rem);
-    max-height: calc(100vh - var(--header-h) - 1rem);
-    width: auto;
-    max-width: min(
-      calc((100vh - var(--header-h) - 1rem) * 68 / 105),
-      100%
-    );
-  }
-
-  .pitch-wrapper.futsal-active {
-    max-width: min(
-      calc((100vh - var(--header-h) - 1rem) * 40 / 80),
-      100%
-    );
-    aspect-ratio: 40 / 80;
-  }
-
-  body.presentation-mode .pitch-wrapper {
-    height: 100vh;
-    max-height: 100vh;
-    max-width: min(calc(100vh * 68 / 105), 100%);
-  }
-
-  body.presentation-mode .pitch-wrapper.futsal-active {
-    max-width: min(calc(100vh * 40 / 80), 100%);
+  .hamburger-btn {
+    display: flex;
   }
 }
 
-/* ══════════════════════════════════════════════
-   RESPONSIVE — SMALL MOBILE (≤ 480px)
-══════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  :root {
+    --sidebar-w: 100%;
+  }
+
+  .app-header {
+    padding: 0 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .header-logo {
+    gap: 0.4rem;
+  }
+
+  .header-logo-icon {
+    font-size: 1rem;
+  }
+
+  .header-title {
+    font-size: 0.95rem;
+    display: none;
+  }
+
+  .header-team {
+    display: none;
+  }
+
+  .header-right {
+    gap: 0.5rem;
+  }
+
+  .btn-icon-text {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.72rem;
+  }
+
+  .status-text {
+    display: none;
+  }
+
+  .status-indicator {
+    gap: 0;
+  }
+
+  /* Make fullscreen button icon-only */
+  .btn-icon-text svg {
+    display: block;
+  }
+
+  .sidebar {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .section-body {
+    max-height: 400px;
+  }
+
+  .sidebar-section--bench .section-body {
+    max-height: 300px;
+  }
+
+  .roster-list {
+    max-height: 250px;
+  }
+
+  .formations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .field-player {
+    width: 42px;
+    height: 42px;
+    font-size: 0.95rem;
+  }
+
+  .field-player-role {
+    font-size: 0.48rem;
+    padding: 1px 3px;
+  }
+
+  .field-player-name {
+    font-size: 0.65rem;
+    bottom: -1.6rem;
+  }
+}
+
 @media (max-width: 480px) {
-  .app-header { padding: 0 0.75rem; gap: 0.6rem; }
-  .header-title { font-size: 0.95rem; }
-  .btn-icon-text { padding: 0.35rem 0.5rem; }
+  .formations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.3rem;
+  }
+
+  .formation-btn {
+    padding: 0.4rem 0.2rem;
+    font-size: 0.68rem;
+  }
+
+  .input-row {
+    gap: 0.3rem;
+  }
+
+  .input-field {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .input-number {
+    min-width: 50px;
+    max-width: 60px;
+  }
+
+  .btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .field-player {
+    width: 38px;
+    height: 38px;
+    font-size: 0.85rem;
+    border-width: 2px;
+  }
+
+  .field-player-name {
+    font-size: 0.6rem;
+    bottom: -1.5rem;
+    max-width: 100px;
+  }
+
+  .exit-presentation-float {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem 0.8rem;
+    font-size: 0.75rem;
+  }
 }
 
 /* ══════════════════════════════════════════════
-   LANDSCAPE MOBILE — field fills width
+   PRINT
 ══════════════════════════════════════════════ */
-@media (max-width: 900px) and (orientation: landscape) {
-  .pitch-container { padding: 0.35rem; }
-
-  .pitch-wrapper {
-    height: calc(100vh - var(--header-h) - 0.7rem);
-    max-height: calc(100vh - var(--header-h) - 0.7rem);
-    width: auto;
-    max-width: min(
-      calc((100vh - var(--header-h) - 0.7rem) * 68 / 105),
-      60vw
-    );
+@media print {
+  .app-header, .sidebar, .exit-presentation-float {
+    display: none !important;
   }
 
-  .pitch-wrapper.futsal-active {
-    max-width: min(
-      calc((100vh - var(--header-h) - 0.7rem) * 40 / 80),
-      50vw
-    );
+  .app-container {
+    height: 100%;
+  }
+
+  .pitch-container {
+    padding: 0;
+    margin: 0;
   }
 }
